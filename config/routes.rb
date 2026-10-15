@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   get 'lists' => 'lists#index'
   get 'lists/:id' => 'lists#show', as: 'list'
   # 'list#show'の設定を、listとして利用できる
-  get "lists/edit"
+  get 'lists/:id/edit' => 'lists#edit', as: 'edit_list'
+  patch 'lists/:id' => 'lists#update', as: 'update_list'
+  delete 'lists/:id' => 'lists#destroy', as: 'destroy_list'
   get "/top" => 'homes#top'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
