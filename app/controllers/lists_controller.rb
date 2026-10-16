@@ -4,9 +4,14 @@ class ListsController < ApplicationController
   end
 
   def create
-    list = List.new(list_params) #list変数　newメソッド
-    list.save #list変数に対してsaveメソッドを呼び出し(dbへの保存)
-    redirect_to list_path(list.id)
+    @list = List.new(list_params) #list変数　newメソッド
+    if @list.save #list変数に対してsaveメソッドを呼び出し(dbへの保存)
+      flash[:notice] = "投稿に成功しました。"
+      redirect_to list_path(@list.id)
+    else
+      flash[:notice] = "投稿に失敗しました。"
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def index
